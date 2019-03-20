@@ -17,3 +17,5 @@ If you want:
 - New assets/sprites
 
 Feel free to [create a new issue](https://github.com/quasilyte/gopherkon/issues/new) or send a Pull Request.
+
+Another way to contribute is to :star: this repository, since it gives me the motivation to continue working on it. You can also help by sharing your gophers on [Twitter](http://twitter.com/) using `#gopherkon` hashtag.
