@@ -1,10 +1,12 @@
 ![logo](/logo.png)
 
-# Gopher Konstructor
+# [Gopher Konstructor](http://quasilyte.dev/gopherkon)
 
 Create [Go](https://golang.org/) gophers and use them as you like.
 
 There is a good chance that the amount of assets available will increase over time.
+
+Currently served at [quasilyte.dev/gopherkon](http://quasilyte.dev/gopherkon).
 
 # Contributing
 
