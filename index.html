@@ -135,7 +135,7 @@ td a:hover {
         <div id="earsOptionTab" class="option-tab"></div>
         <div id="noseOptionTab" class="option-tab"></div>
         <div id="undernoseOptionTab" class="option-tab"></div>
-        <div id="teethsOptionTab" class="option-tab"></div>    
+        <div id="teethOptionTab" class="option-tab"></div>    
         <div id="mouthOptionTab" class="option-tab"></div>    
         <div id="accessoryOptionTab" class="option-tab"></div>
         <div id="extrasOptionTab" class="option-tab"></div>
@@ -172,15 +172,15 @@ var app = (function() {
         "sprites/extras/bowtie.png",
     ];
 
-    var gopherTeethsList = [
+    var gopherTeethList = [
         "sprites/none.png",
-        "sprites/teeths/classical.png",
-        "sprites/teeths/edgy.png",
-        "sprites/teeths/fangs.png",
-        "sprites/teeths/fragile.png",
-        "sprites/teeths/funky.png",
-        "sprites/teeths/shy.png",
-        "sprites/teeths/soft.png",
+        "sprites/teeth/classical.png",
+        "sprites/teeth/edgy.png",
+        "sprites/teeth/fangs.png",
+        "sprites/teeth/fragile.png",
+        "sprites/teeth/funky.png",
+        "sprites/teeth/shy.png",
+        "sprites/teeth/soft.png",
     ];
 
     var gopherMouthList = [
@@ -369,8 +369,8 @@ var app = (function() {
             label: "Ears",
         },
         {
-            key: "teethsOptionTab",
-            options: gopherTeethsList,
+            key: "teethOptionTab",
+            options: gopherTeethList,
             label: "Teeth",
         },
         {
@@ -439,7 +439,7 @@ var app = (function() {
             poseOptionTab: "sprites/pose/dunno.png",
             torsoOptionTab: "sprites/torso/normal",
             earsOptionTab: "sprites/ears/normal",
-            teethsOptionTab: "sprites/teeths/classical.png",
+            teethOptionTab: "sprites/teeth/classical.png",
             mouthOptionTab: "sprites/none.png",
             undernoseOptionTab: "sprites/undernose/normal.png",
             noseOptionTab: "sprites/nose/oval.png",
@@ -455,7 +455,7 @@ var app = (function() {
             {name: "poseOptionTab", fmt: stringListFmt(gopherPoseList)},
             {name: "torsoOptionTab", fmt: stringListFmt(gopherTorsoList)},
             {name: "earsOptionTab", fmt: stringListFmt(gopherEarsList)},
-            {name: "teethsOptionTab", fmt: stringListFmt(gopherTeethsList)},
+            {name: "teethOptionTab", fmt: stringListFmt(gopherTeethList)},
             {name: "mouthOptionTab", fmt: stringListFmt(gopherMouthList)},
             {name: "undernoseOptionTab", fmt: stringListFmt(gopherUndernoseList)},
             {name: "noseOptionTab", fmt: stringListFmt(gopherNoseList)},
@@ -563,7 +563,7 @@ app.renderGopher = function() {
         "extrasOptionTab",
         "eyesOptionTab",
         "mouthOptionTab",
-        "teethsOptionTab",
+        "teethOptionTab",
         "undernoseOptionTab",
         "noseOptionTab",
         "tattooOptionTab",
