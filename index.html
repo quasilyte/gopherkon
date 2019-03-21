@@ -151,12 +151,12 @@ td a:hover {
 var app = (function() {
     function decodeWord(s) {
         s = ""+s; // Ensure it's string.
-        return parseInt(s, 16);
+        return parseInt(s, 36);
     }
 
     function encodeWord(num) {
         num = num|0; // Ensure it's number.
-        s = num.toString(16);
+        s = num.toString(36);
         if (s.length == 2) {
             return s;
         }
@@ -419,6 +419,7 @@ var app = (function() {
             dec: function(s) { return list[decodeWord(s)]; },
         };
     }
+
     function stringListFmt(list) {
         return {
             enc: function(s) { return encodeWord(list.indexOf(s)); },
@@ -426,12 +427,36 @@ var app = (function() {
         };
     }
 
+    var optsFmt = {
+        // We have 1296 values.
+        // It's safe to use up to 10 bits (2^10).
+        //
+        // Bits:
+        // 0-1 - isLegacy
+        // 2-9 - reserved
+        enc: function(opts) {
+            var bits = 0;
+            if (opts.isLegacy) {
+                bits = bits | (1 << 0);
+            }
+            return encodeWord(bits);
+        },
+        dec: function(s) {
+            var opts = {};
+            var bits = decodeWord(s);
+            opts.isLegacy = (bits & (1 << 0)) != 0;
+            return opts;
+        },
+    };
+
     var app = {
         query: new URLSearchParams(window.location.search),
 
-        state: {
-            tabSelection: optionTabList,
+        legacyStateSchemeChunks: 13,
 
+        state: {
+            tabSelection: optionTabList, // TODO(quasilyte): move outside of the "state"?
+            
             // Defaults.
             tab: optionTabList[0],
             colorOptionTab: "sprites/torso/normal/100.png",
@@ -446,6 +471,9 @@ var app = (function() {
             accessoryOptionTab: "sprites/none.png",
             tattooOptionTab: "sprites/none.png",
             extrasOptionTab: "sprites/none.png",
+            opts: {
+                isLegacy: false,
+            },
         },
 
         stateScheme: [
@@ -462,6 +490,7 @@ var app = (function() {
             {name: "accessoryOptionTab", fmt: stringListFmt(gopherAccessoryList)},
             {name: "tattooOptionTab", fmt: stringListFmt(gopherTattooList)},
             {name: "extrasOptionTab", fmt: stringListFmt(gopherExtrasList)},
+            {name: "opts", fmt: optsFmt},
         ],
     };
     return app;
@@ -485,13 +514,33 @@ app.loadState = function() {
     if (!state) {
         return;
     }
+
     var parts = state.match(/.{2}/g);
-    if (parts.length != app.stateScheme.length) {
+    if (parts.length < app.stateScheme.length) {
+        console.warn("legacy state param: have %d chunks, want %d",
+            parts.length, app.stateScheme.length);
+    } else if (parts.length > app.stateScheme.length) {
         console.error("corrupted state param: have %d chunks, want %d",
             parts.length, app.stateScheme.length);
         return;
     }
-    for (var i in app.stateScheme) {
+
+    // Old permalinks detection.
+    if (parts.length == app.legacyStateSchemeChunks) {
+        app.state.opts.isLegacy = true;
+
+        // Hex radix was used before.
+        // Fix old permalinks by re-encoding base-16 values
+        // into base-36 values.
+        for (var i in parts) {
+            var hexValue = parseInt(parts[i], 16);
+            parts[i] = hexValue.toString(36);
+        }
+    }
+
+    // This could initialize state only partially in case of
+    // legacy state strings, where some fields are missing.
+    for (var i in parts) {
         var desc = app.stateScheme[i];
         app.state[desc.name] = desc.fmt.dec(parts[i]);
     }
