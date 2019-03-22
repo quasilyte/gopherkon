@@ -140,6 +140,7 @@ td a:hover {
         <div id="accessoryOptionTab" class="option-tab"></div>
         <div id="extrasOptionTab" class="option-tab"></div>
         <div id="tattooOptionTab" class="option-tab"></div>
+        <div id="hairOptionTab" class="option-tab"></div>
     </div>
 
     <div style="margin-left: 8px; float: left">
@@ -171,6 +172,11 @@ var app = (function() {
         "sprites/none.png",
         "sprites/extras/bowtie.png",
         "sprites/extras/beard_adamj.png",
+    ];
+
+    var gopherHairList = [
+        "sprites/none.png",
+        "sprites/hair/dark_edgy.png",
     ];
 
     var gopherTeethList = [
@@ -405,6 +411,11 @@ var app = (function() {
             options: gopherExtrasList,
             label: "Extras",
         },
+        {
+            key: "hairOptionTab",
+            options: gopherHairList,
+            label: "Hair",
+        },
     ];
 
     function objectListFmt(list) {
@@ -477,6 +488,7 @@ var app = (function() {
                 // Whether URL/state was converted from the pre base-36 form.
                 isLegacy: false,
             },
+            hairOptionTab: "sprites/none.png",
         },
 
         stateScheme: [
@@ -494,6 +506,7 @@ var app = (function() {
             {name: "tattooOptionTab", fmt: stringListFmt(gopherTattooList)},
             {name: "extrasOptionTab", fmt: stringListFmt(gopherExtrasList)},
             {name: "opts", fmt: optsFmt},
+            {name: "hairOptionTab", fmt: stringListFmt(gopherHairList)},
         ],
     };
     return app;
@@ -612,6 +625,7 @@ app.renderGopher = function() {
     var drawOrder = [
         "earsOptionTab",
         "torsoOptionTab",
+        "hairOptionTab",
         "extrasOptionTab",
         "eyesOptionTab",
         "mouthOptionTab",
