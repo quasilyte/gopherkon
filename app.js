@@ -5,7 +5,7 @@ var app = (function () {
     }
     function encodeWord(num) {
         num = num | 0; // Ensure it's number.
-        s = num.toString(36);
+        var s = num.toString(36);
         if (s.length == 2) {
             return s;
         }
@@ -293,7 +293,7 @@ var app = (function () {
             return encodeWord(bits);
         },
         dec: function (s) {
-            var opts = {};
+            var opts = { isLegacy: false };
             var bits = decodeWord(s);
             opts.isLegacy = (bits & (1 << 0)) != 0;
             return opts;
@@ -436,7 +436,7 @@ app.spriteURL = function (url) {
 app.drawImages = function (images) {
     var canvas = document.getElementById("gopher");
     var ctx = canvas.getContext("2d");
-    for (i in images) {
+    for (var i in images) {
         var img = images[i];
         ctx.drawImage(img, 0, 0);
     }
@@ -478,15 +478,17 @@ app.renderGopher = function () {
 };
 app.initDownload = function () {
     var link = document.getElementById("download");
-    download.onclick = function () {
-        link.href = document.getElementById("gopher").toDataURL("image/png;base64");
+    link.onclick = function () {
+        var canvas = document.getElementById("gopher");
+        link.href = canvas.toDataURL("image/png;base64");
     };
 };
 app.copyToClipboard = function (text) {
     var el = document.createElement("textarea"); // Temp container
     el.value = text;
     el.setAttribute("readonly", "");
-    el.style = { position: "absolute", left: "-9999px" };
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
     document.body.appendChild(el);
     el.select();
     try {

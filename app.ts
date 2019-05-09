@@ -6,7 +6,7 @@ var app = (function() {
 
     function encodeWord(num) {
         num = num|0; // Ensure it's number.
-        s = num.toString(36);
+        let s = num.toString(36);
         if (s.length == 2) {
             return s;
         }
@@ -311,7 +311,7 @@ var app = (function() {
             return encodeWord(bits);
         },
         dec: function(s) {
-            var opts = {};
+            var opts = {isLegacy: false};
             var bits = decodeWord(s);
             opts.isLegacy = (bits & (1 << 0)) != 0;
             return opts;
@@ -463,16 +463,16 @@ app.spriteURL = function(url) {
     if (url.endsWith(".png")) {
         return url;
     }
-    var parts = app.state.colorOptionTab.split("/");
-    var suffix = parts[parts.length-1];
+    let parts = app.state.colorOptionTab.split("/");
+    let suffix = parts[parts.length-1];
     return url + "/" + suffix;
 };
 
 app.drawImages = function(images) {
-    var canvas = document.getElementById("gopher");
-    var ctx = canvas.getContext("2d");
-    for (i in images) {
-        var img = images[i];
+    let canvas = <HTMLCanvasElement> document.getElementById("gopher");
+    let ctx = canvas.getContext("2d");
+    for (let i in images) {
+        let img = images[i];
         ctx.drawImage(img, 0, 0);
     }
 };
@@ -515,18 +515,20 @@ app.renderGopher = function() {
 };
 
 app.initDownload = function() {
-    var link = document.getElementById("download");
+    let link = <HTMLAnchorElement> document.getElementById("download");
 
-    download.onclick = function() {
-        link.href = document.getElementById("gopher").toDataURL("image/png;base64");
+    link.onclick = function() {
+        let canvas = <HTMLCanvasElement> document.getElementById("gopher");
+        link.href = canvas.toDataURL("image/png;base64");
     };
 };
 
 app.copyToClipboard = function(text) {
-    var el = document.createElement("textarea"); // Temp container
+    var el = <HTMLTextAreaElement> document.createElement("textarea"); // Temp container
     el.value = text;
     el.setAttribute("readonly", "");
-    el.style = {position: "absolute", left: "-9999px"};
+    el.style.position = "absolute";
+    el.style.left = "-9999px";
     document.body.appendChild(el);
     el.select();
     try {
