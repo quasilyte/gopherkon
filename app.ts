@@ -1,4 +1,5 @@
-var app = (function() {
+namespace App {
+
     function decodeWord(s) {
         s = ""+s; // Ensure it's string.
         return parseInt(s, 36);
@@ -365,199 +366,200 @@ var app = (function() {
             {name: "hairOptionTab", fmt: stringListFmt(gopherHairList)},
         ],
     };
-    return app;
-}());
 
-app.stateString = function(delta) {
-    delta = delta || {};
-    var parts = [];
-    for (var i in app.stateScheme) {
-        var desc = app.stateScheme[i];
-        var val = delta[desc.name] || app.state[desc.name];
-        parts.push(desc.fmt.enc(val));
-    }
-    return parts.join("");
-};
-
-// Try loading state from the "state" GET param or
-// initialize app with default state.
-app.loadState = function() {
-    var state = app.query.get("state");
-    if (!state) {
-        return;
-    }
-
-    var parts = state.match(/.{2}/g);
-    if (parts.length < app.stateScheme.length) {
-        console.warn("legacy state param: have %d chunks, want %d",
-            parts.length, app.stateScheme.length);
-    } else if (parts.length > app.stateScheme.length) {
-        console.error("corrupted state param: have %d chunks, want %d",
-            parts.length, app.stateScheme.length);
-        return;
-    }
-
-    // Old permalinks detection.
-    if (parts.length == app.legacyStateSchemeChunks) {
-        app.state.opts.isLegacy = true;
-
-        // Hex radix was used before.
-        // Fix old permalinks by re-encoding base-16 values
-        // into base-36 values.
-        for (var i in parts) {
-            var hexValue = parseInt(parts[i], 16);
-            parts[i] = hexValue.toString(36);
+    function stateString(delta) {
+        delta = delta || {};
+        var parts = [];
+        for (var i in app.stateScheme) {
+            var desc = app.stateScheme[i];
+            var val = delta[desc.name] || app.state[desc.name];
+            parts.push(desc.fmt.enc(val));
         }
+        return parts.join("");
     }
 
-    // This could initialize state only partially in case of
-    // legacy state strings, where some fields are missing.
-    for (var i in parts) {
-        var desc = app.stateScheme[i];
-        app.state[desc.name] = desc.fmt.dec(parts[i]);
-    }
-};
-
-app.initOptionTabSelector = function() {
-    var tabInfo = app.state.tab;
-    var tabSelector = document.getElementById("tab-selector");
-
-    var parts = [];
-    var tabSelection = app.state.tabSelection;
-    for (var i in tabSelection) {
-        var href = "";
-        var label = tabSelection[i].label;
-        var href = "?state=" + app.stateString({tab: tabSelection[i]});
-        if (tabInfo == tabSelection[i]) {
-            parts.push("<tr><td><a class='tab-selected' href='"+href+"'>"+label+"</a></td></tr>")
-        } else {
-            parts.push("<tr><td><a href='"+href+"'>"+label+"</a></td></tr>")
+    // Try loading state from the "state" GET param or
+    // initialize app with default state.
+    function loadState() {
+        var state = app.query.get("state");
+        if (!state) {
+            return;
         }
-    }
-    tabSelector.innerHTML = parts.join("");
-};
 
-app.initOptionTab = function() {
-    var tabInfo = app.state.tab;
-    var optionTab = document.getElementById(tabInfo.key);
-
-    optionTab.style.display = "block";
-
-    var parts = [];
-    var tabKey = app.state.tab.key;
-    for (var i in tabInfo.options) {
-        var imgURL = app.spriteURL(tabInfo.options[i]);
-        var delta = {};
-        delta[tabKey] = tabInfo.options[i];
-        var href = "?state=" + app.stateString(delta);
-        if (app.state[tabKey] == tabInfo.options[i]) {
-            parts.push("<a class='option-link' href='"+href+"'><img class='option-selected' src='"+imgURL+"'></a>");
-        } else {
-            parts.push("<a class='option-link' href='"+href+"'><img src='"+imgURL+"'></a>");
+        var parts = state.match(/.{2}/g);
+        if (parts.length < app.stateScheme.length) {
+            console.warn("legacy state param: have %d chunks, want %d",
+                parts.length, app.stateScheme.length);
+        } else if (parts.length > app.stateScheme.length) {
+            console.error("corrupted state param: have %d chunks, want %d",
+                parts.length, app.stateScheme.length);
+            return;
         }
-    }
-    optionTab.innerHTML = parts.join("");
-};
 
-app.spriteURL = function(url) {
-    if (url.endsWith(".png")) {
-        return url;
-    }
-    let parts = app.state.colorOptionTab.split("/");
-    let suffix = parts[parts.length-1];
-    return url + "/" + suffix;
-};
+        // Old permalinks detection.
+        if (parts.length == app.legacyStateSchemeChunks) {
+            app.state.opts.isLegacy = true;
 
-app.drawImages = function(images) {
-    let canvas = <HTMLCanvasElement> document.getElementById("gopher");
-    let ctx = canvas.getContext("2d");
-    for (let i in images) {
-        let img = images[i];
-        ctx.drawImage(img, 0, 0);
-    }
-};
-
-app.renderGopher = function() {
-    var drawOrder = [
-        "earsOptionTab",
-        "torsoOptionTab",
-        "hairOptionTab",
-        "extrasOptionTab",
-        "eyesOptionTab",
-        "mouthOptionTab",
-        "teethOptionTab",
-        "undernoseOptionTab",
-        "noseOptionTab",
-        "tattooOptionTab",
-        "poseOptionTab",
-        "accessoryOptionTab",
-    ];
-
-    var images = [];
-    var toLoad = drawOrder.length; // For sync.
-    for (var i in drawOrder) {
-        var tabKey = drawOrder[i];
-        var imgURL = app.spriteURL(app.state[tabKey]);
-        if (!imgURL) {
-            toLoad--;
-            continue;
-        }
-        var img = new Image();
-        images.push(img); // Order is preserved.
-        img.src = imgURL;
-        img.onload = function() {
-            toLoad--;
-            if (toLoad == 0) {
-                app.drawImages(images);
+            // Hex radix was used before.
+            // Fix old permalinks by re-encoding base-16 values
+            // into base-36 values.
+            for (var i in parts) {
+                var hexValue = parseInt(parts[i], 16);
+                parts[i] = hexValue.toString(36);
             }
+        }
+
+        // This could initialize state only partially in case of
+        // legacy state strings, where some fields are missing.
+        for (var i in parts) {
+            var desc = app.stateScheme[i];
+            app.state[desc.name] = desc.fmt.dec(parts[i]);
+        }
+    }
+
+    function initOptionTabSelector() {
+        var tabInfo = app.state.tab;
+        var tabSelector = document.getElementById("tab-selector");
+
+        var parts = [];
+        var tabSelection = app.state.tabSelection;
+        for (var i in tabSelection) {
+            var href = "";
+            var label = tabSelection[i].label;
+            var href = "?state=" + stateString({tab: tabSelection[i]});
+            if (tabInfo == tabSelection[i]) {
+                parts.push("<tr><td><a class='tab-selected' href='"+href+"'>"+label+"</a></td></tr>")
+            } else {
+                parts.push("<tr><td><a href='"+href+"'>"+label+"</a></td></tr>")
+            }
+        }
+        tabSelector.innerHTML = parts.join("");
+    }
+
+    function initOptionTab() {
+        var tabInfo = app.state.tab;
+        var optionTab = document.getElementById(tabInfo.key);
+
+        optionTab.style.display = "block";
+
+        var parts = [];
+        var tabKey = app.state.tab.key;
+        for (var i in tabInfo.options) {
+            var imgURL = spriteURL(tabInfo.options[i]);
+            var delta = {};
+            delta[tabKey] = tabInfo.options[i];
+            var href = "?state=" + stateString(delta);
+            if (app.state[tabKey] == tabInfo.options[i]) {
+                parts.push("<a class='option-link' href='"+href+"'><img class='option-selected' src='"+imgURL+"'></a>");
+            } else {
+                parts.push("<a class='option-link' href='"+href+"'><img src='"+imgURL+"'></a>");
+            }
+        }
+        optionTab.innerHTML = parts.join("");
+    }
+
+    function spriteURL(url) {
+        if (url.endsWith(".png")) {
+            return url;
+        }
+        let parts = app.state.colorOptionTab.split("/");
+        let suffix = parts[parts.length-1];
+        return url + "/" + suffix;
+    }
+
+    function drawImages(images) {
+        let canvas = <HTMLCanvasElement> document.getElementById("gopher");
+        let ctx = canvas.getContext("2d");
+        for (let i in images) {
+            let img = images[i];
+            ctx.drawImage(img, 0, 0);
+        }
+    }
+
+    function renderGopher() {
+        var drawOrder = [
+            "earsOptionTab",
+            "torsoOptionTab",
+            "hairOptionTab",
+            "extrasOptionTab",
+            "eyesOptionTab",
+            "mouthOptionTab",
+            "teethOptionTab",
+            "undernoseOptionTab",
+            "noseOptionTab",
+            "tattooOptionTab",
+            "poseOptionTab",
+            "accessoryOptionTab",
+        ];
+
+        var images = [];
+        var toLoad = drawOrder.length; // For sync.
+        for (var i in drawOrder) {
+            var tabKey = drawOrder[i];
+            var imgURL = spriteURL(app.state[tabKey]);
+            if (!imgURL) {
+                toLoad--;
+                continue;
+            }
+            var img = new Image();
+            images.push(img); // Order is preserved.
+            img.src = imgURL;
+            img.onload = function() {
+                toLoad--;
+                if (toLoad == 0) {
+                    drawImages(images);
+                }
+            };
+        }
+    }
+
+    function initDownload() {
+        let link = <HTMLAnchorElement> document.getElementById("download");
+
+        link.onclick = function() {
+            let canvas = <HTMLCanvasElement> document.getElementById("gopher");
+            link.href = canvas.toDataURL("image/png;base64");
         };
     }
-};
 
-app.initDownload = function() {
-    let link = <HTMLAnchorElement> document.getElementById("download");
-
-    link.onclick = function() {
-        let canvas = <HTMLCanvasElement> document.getElementById("gopher");
-        link.href = canvas.toDataURL("image/png;base64");
-    };
-};
-
-app.copyToClipboard = function(text) {
-    var el = <HTMLTextAreaElement> document.createElement("textarea"); // Temp container
-    el.value = text;
-    el.setAttribute("readonly", "");
-    el.style.position = "absolute";
-    el.style.left = "-9999px";
-    document.body.appendChild(el);
-    el.select();
-    try {
-        var ok = document.execCommand("copy");
-        console.debug("copy to clipboard:", ok);
-    } catch (e) {
-        console.error("clipboard insertion failed", e);
+    function copyToClipboard(text) {
+        var el = <HTMLTextAreaElement> document.createElement("textarea"); // Temp container
+        el.value = text;
+        el.setAttribute("readonly", "");
+        el.style.position = "absolute";
+        el.style.left = "-9999px";
+        document.body.appendChild(el);
+        el.select();
+        try {
+            var ok = document.execCommand("copy");
+            console.debug("copy to clipboard:", ok);
+        } catch (e) {
+            console.error("clipboard insertion failed", e);
+        }
+        document.body.removeChild(el);
     }
-    document.body.removeChild(el);
-};
 
-app.initShareButton = function(stateString) {
-    var share = document.getElementById("share");
-    share.onclick = function() {
-        var url = "https://quasilyte.dev/gopherkon/?state=" + stateString;
-        app.copyToClipboard(url);
-    };
-};
+    function initShareButton(state) {
+        let share = document.getElementById("share");
+        share.onclick = function() {
+            let url = "https://quasilyte.dev/gopherkon/?state=" + state;
+            copyToClipboard(url);
+        };
+    }
 
-app.main = function() {
-    app.loadState();
-    console.debug("decoded state:", app.state);
-    var stateString = app.stateString({});
-    console.debug("state string:", stateString);
-    app.initOptionTabSelector();
-    app.initOptionTab();
-    app.renderGopher();
-    app.initDownload();
-    app.initShareButton(stateString);
-};
+    export function main() {
+        loadState();
+        console.debug("decoded state:", app.state);
+        var state = stateString({});
+        console.debug("state string:", state);
+        initOptionTabSelector();
+        initOptionTab();
+        renderGopher();
+        initDownload();
+        initShareButton(state);
+    }
+}
 
-window.onload = function() { app.main(); };
+window.onload = function() { 
+    App.main();
+};
