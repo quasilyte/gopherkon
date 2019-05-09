@@ -1,5 +1,4 @@
 namespace App {
-
     function decodeWord(s) {
         s = ""+s; // Ensure it's string.
         return parseInt(s, 36);
@@ -18,7 +17,7 @@ namespace App {
         return "0";
     }
 
-    var gopherExtrasList = [
+    let gopherExtrasList = [
         "sprites/none.png",
         "sprites/extras/bowtie.png",
         "sprites/extras/beard_adamj.png",
@@ -26,12 +25,12 @@ namespace App {
         "sprites/extras/antennae.png",
     ];
 
-    var gopherHairList = [
+    let gopherHairList = [
         "sprites/none.png",
         "sprites/hair/dark_edgy.png",
     ];
 
-    var gopherTeethList = [
+    let gopherTeethList = [
         "sprites/none.png",
         "sprites/teeth/classical.png",
         "sprites/teeth/edgy.png",
@@ -42,7 +41,7 @@ namespace App {
         "sprites/teeth/soft.png",
     ];
 
-    var gopherMouthList = [
+    let gopherMouthList = [
         "sprites/none.png",
         "sprites/mouth/grin.png",
         "sprites/mouth/lol.png",
@@ -51,7 +50,7 @@ namespace App {
         "sprites/mouth/tongue.png",
     ];
 
-    var gopherColorsList = [
+    let gopherColorsList = [
         "sprites/torso/normal/0.png",
         "sprites/torso/normal/5.png",
         "sprites/torso/normal/10.png",
@@ -75,7 +74,7 @@ namespace App {
         "sprites/torso/normal/195.png",
     ];
 
-    var gopherEarsList = [
+    let gopherEarsList = [
         "sprites/none.png",
         "sprites/ears/fancy",
         "sprites/ears/fluffy",
@@ -88,7 +87,7 @@ namespace App {
         "sprites/ears/wolf",
     ];
 
-    var gopherTorsoList = [
+    let gopherTorsoList = [
         "sprites/none.png",
         "sprites/torso/cheeky",
         "sprites/torso/curly",
@@ -98,7 +97,7 @@ namespace App {
         "sprites/torso/barbed",
     ];
 
-    var gopherPoseList = [
+    let gopherPoseList = [
         "sprites/none.png",
         "sprites/pose/cowboy.png",
         "sprites/pose/dunno.png",
@@ -124,7 +123,7 @@ namespace App {
         "sprites/pose/timid.png",
     ];
 
-    var gopherNoseList = [
+    let gopherNoseList = [
         "sprites/nose/neat_a.png",
         "sprites/nose/neat_b.png",
         "sprites/nose/oval.png",
@@ -133,7 +132,7 @@ namespace App {
         "sprites/nose/tiny.png",
     ];
 
-    var gopherAccessoryList = [
+    let gopherAccessoryList = [
         "sprites/none.png",
         "sprites/accessory/censored_black.png",
         "sprites/accessory/censored_red.png",
@@ -146,7 +145,7 @@ namespace App {
         "sprites/accessory/glasses_adamj.png",
     ];
 
-    var gopherEyesList = [
+    let gopherEyesList = [
         "sprites/eyes/alien_center.png",
         "sprites/eyes/alien_crazy.png",
         "sprites/eyes/alien_fish.png",
@@ -176,14 +175,14 @@ namespace App {
         "sprites/eyes/wink.png",
     ];
 
-    var gopherUndernoseList = [
+    let gopherUndernoseList = [
         "sprites/undernose/normal.png",
         "sprites/undernose/oval.png",
         "sprites/undernose/rome.png",
         "sprites/undernose/small.png",
     ];
 
-    var gopherTattooList = [
+    let gopherTattooList = [
         "sprites/none.png",
         "sprites/tattoo/apple.png",
         "sprites/tattoo/batman.png",
@@ -207,7 +206,7 @@ namespace App {
         "sprites/tattoo/vaultboy.png",
     ];
 
-    var optionTabList = [
+    let optionTabList = [
         {
             key: "colorOptionTab",
             options: gopherColorsList,
@@ -278,7 +277,7 @@ namespace App {
     function objectListFmt(list) {
         return {
             enc: function(x) {
-                for (var i in list) {
+                for (let i in list) {
                     if (list[i].key == x.key) {
                         return encodeWord(i);
                     }                    
@@ -297,7 +296,7 @@ namespace App {
         };
     }
 
-    var optsFmt = {
+    let optsFmt = {
         // We have 1296 values.
         // It's safe to use up to 10 bits (2^10).
         //
@@ -305,21 +304,21 @@ namespace App {
         // 0-1 - isLegacy
         // 2-9 - reserved
         enc: function(opts) {
-            var bits = 0;
+            let bits = 0;
             if (opts.isLegacy) {
                 bits = bits | (1 << 0);
             }
             return encodeWord(bits);
         },
         dec: function(s) {
-            var opts = {isLegacy: false};
-            var bits = decodeWord(s);
+            let opts = {isLegacy: false};
+            let bits = decodeWord(s);
             opts.isLegacy = (bits & (1 << 0)) != 0;
             return opts;
         },
     };
 
-    var app = {
+    let app = {
         query: new URLSearchParams(window.location.search),
 
         legacyStateSchemeChunks: 13,
@@ -369,10 +368,10 @@ namespace App {
 
     function stateString(delta) {
         delta = delta || {};
-        var parts = [];
-        for (var i in app.stateScheme) {
-            var desc = app.stateScheme[i];
-            var val = delta[desc.name] || app.state[desc.name];
+        let parts = [];
+        for (let i in app.stateScheme) {
+            let desc = app.stateScheme[i];
+            let val = delta[desc.name] || app.state[desc.name];
             parts.push(desc.fmt.enc(val));
         }
         return parts.join("");
@@ -381,12 +380,12 @@ namespace App {
     // Try loading state from the "state" GET param or
     // initialize app with default state.
     function loadState() {
-        var state = app.query.get("state");
+        let state = app.query.get("state");
         if (!state) {
             return;
         }
 
-        var parts = state.match(/.{2}/g);
+        let parts = state.match(/.{2}/g);
         if (parts.length < app.stateScheme.length) {
             console.warn("legacy state param: have %d chunks, want %d",
                 parts.length, app.stateScheme.length);
@@ -403,30 +402,29 @@ namespace App {
             // Hex radix was used before.
             // Fix old permalinks by re-encoding base-16 values
             // into base-36 values.
-            for (var i in parts) {
-                var hexValue = parseInt(parts[i], 16);
+            for (let i in parts) {
+                let hexValue = parseInt(parts[i], 16);
                 parts[i] = hexValue.toString(36);
             }
         }
 
         // This could initialize state only partially in case of
         // legacy state strings, where some fields are missing.
-        for (var i in parts) {
-            var desc = app.stateScheme[i];
+        for (let i in parts) {
+            let desc = app.stateScheme[i];
             app.state[desc.name] = desc.fmt.dec(parts[i]);
         }
     }
 
     function initOptionTabSelector() {
-        var tabInfo = app.state.tab;
-        var tabSelector = document.getElementById("tab-selector");
+        let tabInfo = app.state.tab;
+        let tabSelector = document.getElementById("tab-selector");
 
-        var parts = [];
-        var tabSelection = app.state.tabSelection;
-        for (var i in tabSelection) {
-            var href = "";
-            var label = tabSelection[i].label;
-            var href = "?state=" + stateString({tab: tabSelection[i]});
+        let parts = [];
+        let tabSelection = app.state.tabSelection;
+        for (let i in tabSelection) {
+            let label = tabSelection[i].label;
+            let href = "?state=" + stateString({tab: tabSelection[i]});
             if (tabInfo == tabSelection[i]) {
                 parts.push("<tr><td><a class='tab-selected' href='"+href+"'>"+label+"</a></td></tr>")
             } else {
@@ -437,18 +435,18 @@ namespace App {
     }
 
     function initOptionTab() {
-        var tabInfo = app.state.tab;
-        var optionTab = document.getElementById(tabInfo.key);
+        let tabInfo = app.state.tab;
+        let optionTab = document.getElementById(tabInfo.key);
 
         optionTab.style.display = "block";
 
-        var parts = [];
-        var tabKey = app.state.tab.key;
-        for (var i in tabInfo.options) {
-            var imgURL = spriteURL(tabInfo.options[i]);
-            var delta = {};
+        let parts = [];
+        let tabKey = app.state.tab.key;
+        for (let i in tabInfo.options) {
+            let imgURL = spriteURL(tabInfo.options[i]);
+            let delta = {};
             delta[tabKey] = tabInfo.options[i];
-            var href = "?state=" + stateString(delta);
+            let href = "?state=" + stateString(delta);
             if (app.state[tabKey] == tabInfo.options[i]) {
                 parts.push("<a class='option-link' href='"+href+"'><img class='option-selected' src='"+imgURL+"'></a>");
             } else {
@@ -477,7 +475,7 @@ namespace App {
     }
 
     function renderGopher() {
-        var drawOrder = [
+        let drawOrder = [
             "earsOptionTab",
             "torsoOptionTab",
             "hairOptionTab",
@@ -492,16 +490,16 @@ namespace App {
             "accessoryOptionTab",
         ];
 
-        var images = [];
-        var toLoad = drawOrder.length; // For sync.
-        for (var i in drawOrder) {
-            var tabKey = drawOrder[i];
-            var imgURL = spriteURL(app.state[tabKey]);
+        let images = [];
+        let toLoad = drawOrder.length; // For sync.
+        for (let i in drawOrder) {
+            let tabKey = drawOrder[i];
+            let imgURL = spriteURL(app.state[tabKey]);
             if (!imgURL) {
                 toLoad--;
                 continue;
             }
-            var img = new Image();
+            let img = new Image();
             images.push(img); // Order is preserved.
             img.src = imgURL;
             img.onload = function() {
@@ -523,7 +521,7 @@ namespace App {
     }
 
     function copyToClipboard(text) {
-        var el = <HTMLTextAreaElement> document.createElement("textarea"); // Temp container
+        let el = <HTMLTextAreaElement> document.createElement("textarea"); // Temp container
         el.value = text;
         el.setAttribute("readonly", "");
         el.style.position = "absolute";
@@ -531,7 +529,7 @@ namespace App {
         document.body.appendChild(el);
         el.select();
         try {
-            var ok = document.execCommand("copy");
+            let ok = document.execCommand("copy");
             console.debug("copy to clipboard:", ok);
         } catch (e) {
             console.error("clipboard insertion failed", e);
@@ -550,7 +548,7 @@ namespace App {
     export function main() {
         loadState();
         console.debug("decoded state:", app.state);
-        var state = stateString({});
+        let state = stateString({});
         console.debug("state string:", state);
         initOptionTabSelector();
         initOptionTab();

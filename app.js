@@ -392,7 +392,6 @@ var App;
         var parts = [];
         var tabSelection = app.state.tabSelection;
         for (var i in tabSelection) {
-            var href = "";
             var label = tabSelection[i].label;
             var href = "?state=" + stateString({ tab: tabSelection[i] });
             if (tabInfo == tabSelection[i]) {
