@@ -1,11 +1,9 @@
 var App;
 (function (App) {
     function decodeWord(s) {
-        s = "" + s; // Ensure it's string.
         return parseInt(s, 36);
     }
     function encodeWord(num) {
-        num = num | 0; // Ensure it's number.
         var s = num.toString(36);
         if (s.length == 2) {
             return s;
@@ -264,7 +262,7 @@ var App;
             enc: function (x) {
                 for (var i in list) {
                     if (list[i].key == x.key) {
-                        return encodeWord(i);
+                        return encodeWord(+i);
                     }
                 }
                 console.error("%s not found", x.key);

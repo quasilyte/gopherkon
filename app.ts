@@ -1,11 +1,9 @@
 namespace App {
-    function decodeWord(s) {
-        s = ""+s; // Ensure it's string.
+    function decodeWord(s: string): number {
         return parseInt(s, 36);
     }
 
-    function encodeWord(num) {
-        num = num|0; // Ensure it's number.
+    function encodeWord(num: number): string {
         let s = num.toString(36);
         if (s.length == 2) {
             return s;
@@ -279,7 +277,7 @@ namespace App {
             enc: function(x) {
                 for (let i in list) {
                     if (list[i].key == x.key) {
-                        return encodeWord(i);
+                        return encodeWord(+i);
                     }                    
                 }
                 console.error("%s not found", x.key);
@@ -456,7 +454,7 @@ namespace App {
         optionTab.innerHTML = parts.join("");
     }
 
-    function spriteURL(url) {
+    function spriteURL(url: string) {
         if (url.endsWith(".png")) {
             return url;
         }
@@ -520,7 +518,7 @@ namespace App {
         };
     }
 
-    function copyToClipboard(text) {
+    function copyToClipboard(text: string) {
         let el = <HTMLTextAreaElement> document.createElement("textarea"); // Temp container
         el.value = text;
         el.setAttribute("readonly", "");
