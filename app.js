@@ -507,6 +507,57 @@ var App;
             copyToClipboard(url);
         };
     }
+    function getOptionsList(key) {
+        for (let tab of app.state.tabSelection) {
+            if (tab.key == key) {
+                return tab;
+            }
+        }
+        return null;
+    }
+    function rand(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+    function randBool() {
+        return Math.random() >= 0.5;
+    }
+    function randomizedState() {
+        // preferZero enumerate tabs that should have at least 50%
+        // to have zero value against all other options.
+        let preferZero = new Set([
+            "accessoryOptionTab",
+            "extrasOptionTab",
+            "hairOptionTab",
+            "tattooOptionTab",
+        ]);
+        // nonZero enumerates tabs that should not have 0 index.
+        let nonZero = new Set([
+            "poseOptionTab",
+            "torsoOptionTab",
+            "earsOptionTab",
+            "teethOptionTab",
+        ]);
+        let delta = {};
+        for (let i in app.stateScheme) {
+            let desc = app.stateScheme[i];
+            let tab = getOptionsList(desc.name);
+            if (tab === null) {
+                continue;
+            }
+            let minIndex = nonZero.has(desc.name) ? 1 : 0;
+            let index = rand(minIndex, tab.options.length);
+            if (preferZero.has(desc.name) && randBool()) {
+                index = 0;
+            }
+            let value = desc.fmt.dec(encodeWord(index));
+            delta[desc.name] = value;
+        }
+        return stateString(delta);
+    }
+    function initShuffleButton() {
+        let shuffle = document.getElementById("shuffle");
+        shuffle.href = "?state=" + randomizedState();
+    }
     function changeTab(tabIndex) {
         let tabSelection = app.state.tabSelection;
         let href = "?state=" + stateString({ tab: tabSelection[tabIndex] });
@@ -534,6 +585,7 @@ var App;
         renderGopher();
         initDownload();
         initShareButton();
+        initShuffleButton();
     }
     App.main = main;
 })(App || (App = {}));
