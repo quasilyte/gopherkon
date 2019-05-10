@@ -24,6 +24,8 @@ var App;
     const gopherHairList = [
         "sprites/none.png",
         "sprites/hair/dark_edgy.png",
+        "sprites/hair/payot.png",
+        "sprites/hair/short.png",
     ];
     const gopherTeethList = [
         "sprites/none.png",
@@ -34,6 +36,7 @@ var App;
         "sprites/teeth/funky.png",
         "sprites/teeth/shy.png",
         "sprites/teeth/soft.png",
+        "sprites/teeth/broken.png",
     ];
     const gopherMouthList = [
         "sprites/none.png",
@@ -189,6 +192,7 @@ var App;
         "sprites/tattoo/hello_kitty.png",
         "sprites/tattoo/sonic.png",
         "sprites/tattoo/vaultboy.png",
+        "sprites/tattoo/reddit.png",
     ];
     const optionTabList = [
         {

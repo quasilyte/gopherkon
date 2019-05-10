@@ -26,6 +26,8 @@ namespace App {
     const gopherHairList = [
         "sprites/none.png",
         "sprites/hair/dark_edgy.png",
+        "sprites/hair/payot.png",
+        "sprites/hair/short.png",
     ];
 
     const gopherTeethList = [
@@ -37,6 +39,7 @@ namespace App {
         "sprites/teeth/funky.png",
         "sprites/teeth/shy.png",
         "sprites/teeth/soft.png",
+        "sprites/teeth/broken.png",
     ];
 
     const gopherMouthList = [
@@ -202,6 +205,7 @@ namespace App {
         "sprites/tattoo/hello_kitty.png",
         "sprites/tattoo/sonic.png",
         "sprites/tattoo/vaultboy.png",
+        "sprites/tattoo/reddit.png",
     ];
 
     const optionTabList = [
