@@ -423,9 +423,9 @@ namespace App {
         for (let i in tabSelection) {
             let label = tabSelection[i].label;
             if (tabInfo == tabSelection[i]) {
-                parts.push(`<tr><td><div class='tab-selected' onclick='App.changeTab(${i})'>${label}</div></td></tr>`);
+                parts.push(`<tr><td><button class='tab-selected' onclick='App.changeTab(${i})'>${label}</button></td></tr>`);
             } else {
-                parts.push(`<tr><td><div onclick='App.changeTab(${i})'>${label}</div></td></tr>`);
+                parts.push(`<tr><td><button onclick='App.changeTab(${i})'>${label}</button></td></tr>`);
             }
         }
         tabSelector.innerHTML = parts.join("");
@@ -445,9 +445,9 @@ namespace App {
             delta[tabKey] = tabInfo.options[i];
             let updatedState = stateString(delta);
             if (app.state[tabKey] == tabInfo.options[i]) {
-                parts.push(`<div class='option-link' onclick='App.updateWithoutReload("${updatedState}")'><img class='option-selected' src='${imgURL}'></div>`);
+                parts.push(`<button class='option-link' onclick='App.updateWithoutReload("${updatedState}")'><img class='option-selected' src='${imgURL}'></button>`);
             } else {
-                parts.push(`<div class='option-link' onclick='App.updateWithoutReload("${updatedState}")'><img src='${imgURL}'></div>`);
+                parts.push(`<button class='option-link' onclick='App.updateWithoutReload("${updatedState}")'><img src='${imgURL}'></button>`);
             }
         }
         optionTab.innerHTML = parts.join("");
