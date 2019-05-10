@@ -4,7 +4,7 @@ var App;
         return parseInt(s, 36);
     }
     function encodeWord(num) {
-        var s = num.toString(36);
+        let s = num.toString(36);
         if (s.length == 2) {
             return s;
         }
@@ -14,18 +14,18 @@ var App;
         console.error("bad num: %d", num);
         return "0";
     }
-    var gopherExtrasList = [
+    const gopherExtrasList = [
         "sprites/none.png",
         "sprites/extras/bowtie.png",
         "sprites/extras/beard_adamj.png",
         "sprites/extras/scar_harry.png",
         "sprites/extras/antennae.png",
     ];
-    var gopherHairList = [
+    const gopherHairList = [
         "sprites/none.png",
         "sprites/hair/dark_edgy.png",
     ];
-    var gopherTeethList = [
+    const gopherTeethList = [
         "sprites/none.png",
         "sprites/teeth/classical.png",
         "sprites/teeth/edgy.png",
@@ -35,7 +35,7 @@ var App;
         "sprites/teeth/shy.png",
         "sprites/teeth/soft.png",
     ];
-    var gopherMouthList = [
+    const gopherMouthList = [
         "sprites/none.png",
         "sprites/mouth/grin.png",
         "sprites/mouth/lol.png",
@@ -43,7 +43,7 @@ var App;
         "sprites/mouth/surprised.png",
         "sprites/mouth/tongue.png",
     ];
-    var gopherColorsList = [
+    const gopherColorsList = [
         "sprites/torso/normal/0.png",
         "sprites/torso/normal/5.png",
         "sprites/torso/normal/10.png",
@@ -66,7 +66,7 @@ var App;
         "sprites/torso/normal/180.png",
         "sprites/torso/normal/195.png",
     ];
-    var gopherEarsList = [
+    const gopherEarsList = [
         "sprites/none.png",
         "sprites/ears/fancy",
         "sprites/ears/fluffy",
@@ -78,7 +78,7 @@ var App;
         "sprites/ears/wide",
         "sprites/ears/wolf",
     ];
-    var gopherTorsoList = [
+    const gopherTorsoList = [
         "sprites/none.png",
         "sprites/torso/cheeky",
         "sprites/torso/curly",
@@ -87,7 +87,7 @@ var App;
         "sprites/torso/wolf",
         "sprites/torso/barbed",
     ];
-    var gopherPoseList = [
+    const gopherPoseList = [
         "sprites/none.png",
         "sprites/pose/cowboy.png",
         "sprites/pose/dunno.png",
@@ -112,7 +112,7 @@ var App;
         "sprites/pose/timid.money.png",
         "sprites/pose/timid.png",
     ];
-    var gopherNoseList = [
+    const gopherNoseList = [
         "sprites/nose/neat_a.png",
         "sprites/nose/neat_b.png",
         "sprites/nose/oval.png",
@@ -120,7 +120,7 @@ var App;
         "sprites/nose/small.png",
         "sprites/nose/tiny.png",
     ];
-    var gopherAccessoryList = [
+    const gopherAccessoryList = [
         "sprites/none.png",
         "sprites/accessory/censored_black.png",
         "sprites/accessory/censored_red.png",
@@ -132,7 +132,7 @@ var App;
         "sprites/accessory/glasses_square.png",
         "sprites/accessory/glasses_adamj.png",
     ];
-    var gopherEyesList = [
+    const gopherEyesList = [
         "sprites/eyes/alien_center.png",
         "sprites/eyes/alien_crazy.png",
         "sprites/eyes/alien_fish.png",
@@ -161,13 +161,13 @@ var App;
         "sprites/eyes/small_center_lashes.png",
         "sprites/eyes/wink.png",
     ];
-    var gopherUndernoseList = [
+    const gopherUndernoseList = [
         "sprites/undernose/normal.png",
         "sprites/undernose/oval.png",
         "sprites/undernose/rome.png",
         "sprites/undernose/small.png",
     ];
-    var gopherTattooList = [
+    const gopherTattooList = [
         "sprites/none.png",
         "sprites/tattoo/apple.png",
         "sprites/tattoo/batman.png",
@@ -190,77 +190,77 @@ var App;
         "sprites/tattoo/sonic.png",
         "sprites/tattoo/vaultboy.png",
     ];
-    var optionTabList = [
+    const optionTabList = [
         {
             key: "colorOptionTab",
             options: gopherColorsList,
-            label: "Body color"
+            label: "Body color",
         },
         {
             key: "eyesOptionTab",
             options: gopherEyesList,
-            label: "Eyes"
+            label: "Eyes",
         },
         {
             key: "poseOptionTab",
             options: gopherPoseList,
-            label: "Pose"
+            label: "Pose",
         },
         {
             key: "torsoOptionTab",
             options: gopherTorsoList,
-            label: "Torso"
+            label: "Torso",
         },
         {
             key: "earsOptionTab",
             options: gopherEarsList,
-            label: "Ears"
+            label: "Ears",
         },
         {
             key: "teethOptionTab",
             options: gopherTeethList,
-            label: "Teeth"
+            label: "Teeth",
         },
         {
             key: "mouthOptionTab",
             options: gopherMouthList,
-            label: "Mouth"
+            label: "Mouth",
         },
         {
             key: "undernoseOptionTab",
             options: gopherUndernoseList,
-            label: "Undernose"
+            label: "Undernose",
         },
         {
             key: "noseOptionTab",
             options: gopherNoseList,
-            label: "Nose"
+            label: "Nose",
         },
         {
             key: "accessoryOptionTab",
             options: gopherAccessoryList,
-            label: "Accessory"
+            label: "Accessory",
         },
         {
             key: "tattooOptionTab",
             options: gopherTattooList,
-            label: "Tattoo"
+            label: "Tattoo",
         },
         {
             key: "extrasOptionTab",
             options: gopherExtrasList,
-            label: "Extras"
+            label: "Extras",
         },
         {
             key: "hairOptionTab",
             options: gopherHairList,
-            label: "Hair"
+            label: "Hair",
         },
     ];
     function objectListFmt(list) {
         return {
             enc: function (x) {
-                for (var i in list) {
+                for (let i in list) {
                     if (list[i].key == x.key) {
                         return encodeWord(+i);
                     }
@@ -268,16 +268,16 @@ var App;
                 console.error("%s not found", x.key);
                 return encodeWord(0);
             },
-            dec: function (s) { return list[decodeWord(s)]; }
+            dec: function (s) { return list[decodeWord(s)]; },
         };
     }
     function stringListFmt(list) {
         return {
             enc: function (s) { return encodeWord(list.indexOf(s)); },
-            dec: function (s) { return list[decodeWord(s)]; }
+            dec: function (s) { return list[decodeWord(s)]; },
         };
     }
-    var optsFmt = {
+    let optsFmt = {
         // We have 1296 values.
         // It's safe to use up to 10 bits (2^10).
         //
@@ -285,20 +285,20 @@ var App;
         // 0-1 - isLegacy
         // 2-9 - reserved
         enc: function (opts) {
-            var bits = 0;
+            let bits = 0;
             if (opts.isLegacy) {
                 bits = bits | (1 << 0);
             }
             return encodeWord(bits);
         },
         dec: function (s) {
-            var opts = { isLegacy: false };
-            var bits = decodeWord(s);
+            let opts = { isLegacy: false };
+            let bits = decodeWord(s);
             opts.isLegacy = (bits & (1 << 0)) != 0;
             return opts;
-        }
+        },
     };
-    var app = {
+    let app = {
         query: new URLSearchParams(window.location.search),
         legacyStateSchemeChunks: 13,
         state: {
@@ -319,9 +319,9 @@ var App;
             extrasOptionTab: "sprites/none.png",
             opts: {
                 // Whether URL/state was converted from the pre base-36 form.
-                isLegacy: false
+                isLegacy: false,
             },
-            hairOptionTab: "sprites/none.png"
+            hairOptionTab: "sprites/none.png",
         },
         stateScheme: [
             { name: "tab", fmt: objectListFmt(optionTabList) },
@@ -339,26 +339,26 @@ var App;
             { name: "extrasOptionTab", fmt: stringListFmt(gopherExtrasList) },
             { name: "opts", fmt: optsFmt },
             { name: "hairOptionTab", fmt: stringListFmt(gopherHairList) },
-        ]
+        ],
     };
     function stateString(delta) {
         delta = delta || {};
-        var parts = [];
-        for (var i in app.stateScheme) {
-            var desc = app.stateScheme[i];
-            var val = delta[desc.name] || app.state[desc.name];
+        let parts = [];
+        for (let i in app.stateScheme) {
+            let desc = app.stateScheme[i];
+            let val = delta[desc.name] || app.state[desc.name];
             parts.push(desc.fmt.enc(val));
         }
         return parts.join("");
     }
-    // Try loading state from the "state" GET param or
-    // initialize app with default state.
-    function loadState() {
-        var state = app.query.get("state");
+    // Try loading state from the state argument or,
+    // if not explicitely passed, "state" GET param.
+    function loadState(state = "") {
+        state = state || app.query.get("state");
         if (!state) {
             return;
         }
-        var parts = state.match(/.{2}/g);
+        let parts = state.match(/.{2}/g);
         if (parts.length < app.stateScheme.length) {
             console.warn("legacy state param: have %d chunks, want %d", parts.length, app.stateScheme.length);
         }
@@ -372,51 +372,50 @@ var App;
             // Hex radix was used before.
             // Fix old permalinks by re-encoding base-16 values
             // into base-36 values.
-            for (var i in parts) {
-                var hexValue = parseInt(parts[i], 16);
+            for (let i in parts) {
+                let hexValue = parseInt(parts[i], 16);
                 parts[i] = hexValue.toString(36);
             }
         }
         // This could initialize state only partially in case of
         // legacy state strings, where some fields are missing.
-        for (var i in parts) {
-            var desc = app.stateScheme[i];
+        for (let i in parts) {
+            let desc = app.stateScheme[i];
             app.state[desc.name] = desc.fmt.dec(parts[i]);
         }
     }
     function initOptionTabSelector() {
-        var tabInfo = app.state.tab;
-        var tabSelector = document.getElementById("tab-selector");
-        var parts = [];
-        var tabSelection = app.state.tabSelection;
-        for (var i in tabSelection) {
-            var label = tabSelection[i].label;
-            var href = "?state=" + stateString({ tab: tabSelection[i] });
+        let tabInfo = app.state.tab;
+        let tabSelector = document.getElementById("tab-selector");
+        let parts = [];
+        let tabSelection = app.state.tabSelection;
+        for (let i in tabSelection) {
+            let label = tabSelection[i].label;
             if (tabInfo == tabSelection[i]) {
-                parts.push("<tr><td><a class='tab-selected' href='" + href + "'>" + label + "</a></td></tr>");
+                parts.push(`<tr><td><div class='tab-selected' onclick='App.changeTab(${i})'>${label}</div></td></tr>`);
             }
             else {
-                parts.push("<tr><td><a href='" + href + "'>" + label + "</a></td></tr>");
+                parts.push(`<tr><td><div onclick='App.changeTab(${i})'>${label}</div></td></tr>`);
             }
         }
         tabSelector.innerHTML = parts.join("");
     }
     function initOptionTab() {
-        var tabInfo = app.state.tab;
-        var optionTab = document.getElementById(tabInfo.key);
+        let tabInfo = app.state.tab;
+        let optionTab = document.getElementById(tabInfo.key);
         optionTab.style.display = "block";
-        var parts = [];
-        var tabKey = app.state.tab.key;
-        for (var i in tabInfo.options) {
-            var imgURL = spriteURL(tabInfo.options[i]);
-            var delta = {};
+        let parts = [];
+        let tabKey = app.state.tab.key;
+        for (let i in tabInfo.options) {
+            let imgURL = spriteURL(tabInfo.options[i]);
+            let delta = {};
             delta[tabKey] = tabInfo.options[i];
-            var href = "?state=" + stateString(delta);
+            let updatedState = stateString(delta);
             if (app.state[tabKey] == tabInfo.options[i]) {
-                parts.push("<a class='option-link' href='" + href + "'><img class='option-selected' src='" + imgURL + "'></a>");
+                parts.push(`<div class='option-link' onclick='App.updateWithoutReload("${updatedState}")'><img class='option-selected' src='${imgURL}'></div>`);
             }
             else {
-                parts.push("<a class='option-link' href='" + href + "'><img src='" + imgURL + "'></a>");
+                parts.push(`<div class='option-link' onclick='App.updateWithoutReload("${updatedState}")'><img src='${imgURL}'></div>`);
             }
         }
         optionTab.innerHTML = parts.join("");
@@ -425,20 +424,21 @@ var App;
         if (url.endsWith(".png")) {
             return url;
         }
-        var parts = app.state.colorOptionTab.split("/");
-        var suffix = parts[parts.length - 1];
+        let parts = app.state.colorOptionTab.split("/");
+        let suffix = parts[parts.length - 1];
         return url + "/" + suffix;
     }
     function drawImages(images) {
-        var canvas = document.getElementById("gopher");
-        var ctx = canvas.getContext("2d");
-        for (var i in images) {
-            var img = images[i];
+        let canvas = document.getElementById("gopher");
+        let ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i in images) {
+            let img = images[i];
             ctx.drawImage(img, 0, 0);
         }
     }
     function renderGopher() {
-        var drawOrder = [
+        let drawOrder = [
             "earsOptionTab",
             "torsoOptionTab",
             "hairOptionTab",
@@ -452,16 +452,16 @@ var App;
             "poseOptionTab",
             "accessoryOptionTab",
         ];
-        var images = [];
-        var toLoad = drawOrder.length; // For sync.
-        for (var i in drawOrder) {
-            var tabKey = drawOrder[i];
-            var imgURL = spriteURL(app.state[tabKey]);
+        let images = [];
+        let toLoad = drawOrder.length; // For sync.
+        for (let i in drawOrder) {
+            let tabKey = drawOrder[i];
+            let imgURL = spriteURL(app.state[tabKey]);
             if (!imgURL) {
                 toLoad--;
                 continue;
             }
-            var img = new Image();
+            let img = new Image();
             images.push(img); // Order is preserved.
             img.src = imgURL;
             img.onload = function () {
@@ -473,14 +473,14 @@ var App;
         }
     }
     function initDownload() {
-        var link = document.getElementById("download");
+        let link = document.getElementById("download");
         link.onclick = function () {
-            var canvas = document.getElementById("gopher");
+            let canvas = document.getElementById("gopher");
             link.href = canvas.toDataURL("image/png;base64");
         };
     }
     function copyToClipboard(text) {
-        var el = document.createElement("textarea"); // Temp container
+        let el = document.createElement("textarea"); // Temp container
         el.value = text;
         el.setAttribute("readonly", "");
         el.style.position = "absolute";
@@ -488,7 +488,7 @@ var App;
         document.body.appendChild(el);
         el.select();
         try {
-            var ok = document.execCommand("copy");
+            let ok = document.execCommand("copy");
             console.debug("copy to clipboard:", ok);
         }
         catch (e) {
@@ -496,23 +496,40 @@ var App;
         }
         document.body.removeChild(el);
     }
-    function initShareButton(state) {
-        var share = document.getElementById("share");
+    function initShareButton() {
+        let share = document.getElementById("share");
         share.onclick = function () {
-            var url = "https://quasilyte.dev/gopherkon/?state=" + state;
+            let url = "https://quasilyte.dev/gopherkon/?state=" + stateString({});
             copyToClipboard(url);
         };
     }
+    function changeTab(tabIndex) {
+        let tabSelection = app.state.tabSelection;
+        let href = "?state=" + stateString({ tab: tabSelection[tabIndex] });
+        window.location.href = href;
+    }
+    App.changeTab = changeTab;
+    function updateWithoutReload(state) {
+        loadState(state);
+        initOptionTab();
+        renderGopher();
+        // Rewrite URL query, if possible.
+        if (window.history.replaceState) {
+            let url = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            url = url + "?state=" + state;
+            window.history.replaceState({ path: url }, "", url);
+        }
+    }
+    App.updateWithoutReload = updateWithoutReload;
     function main() {
         loadState();
         console.debug("decoded state:", app.state);
-        var state = stateString({});
-        console.debug("state string:", state);
+        console.debug("state string:", stateString({}));
         initOptionTabSelector();
         initOptionTab();
         renderGopher();
         initDownload();
-        initShareButton(state);
+        initShareButton();
     }
     App.main = main;
 })(App || (App = {}));

@@ -15,7 +15,7 @@ namespace App {
         return "0";
     }
 
-    let gopherExtrasList = [
+    const gopherExtrasList = [
         "sprites/none.png",
         "sprites/extras/bowtie.png",
         "sprites/extras/beard_adamj.png",
@@ -23,12 +23,12 @@ namespace App {
         "sprites/extras/antennae.png",
     ];
 
-    let gopherHairList = [
+    const gopherHairList = [
         "sprites/none.png",
         "sprites/hair/dark_edgy.png",
     ];
 
-    let gopherTeethList = [
+    const gopherTeethList = [
         "sprites/none.png",
         "sprites/teeth/classical.png",
         "sprites/teeth/edgy.png",
@@ -39,7 +39,7 @@ namespace App {
         "sprites/teeth/soft.png",
     ];
 
-    let gopherMouthList = [
+    const gopherMouthList = [
         "sprites/none.png",
         "sprites/mouth/grin.png",
         "sprites/mouth/lol.png",
@@ -48,7 +48,7 @@ namespace App {
         "sprites/mouth/tongue.png",
     ];
 
-    let gopherColorsList = [
+    const gopherColorsList = [
         "sprites/torso/normal/0.png",
         "sprites/torso/normal/5.png",
         "sprites/torso/normal/10.png",
@@ -72,7 +72,7 @@ namespace App {
         "sprites/torso/normal/195.png",
     ];
 
-    let gopherEarsList = [
+    const gopherEarsList = [
         "sprites/none.png",
         "sprites/ears/fancy",
         "sprites/ears/fluffy",
@@ -85,7 +85,7 @@ namespace App {
         "sprites/ears/wolf",
     ];
 
-    let gopherTorsoList = [
+    const gopherTorsoList = [
         "sprites/none.png",
         "sprites/torso/cheeky",
         "sprites/torso/curly",
@@ -95,7 +95,7 @@ namespace App {
         "sprites/torso/barbed",
     ];
 
-    let gopherPoseList = [
+    const gopherPoseList = [
         "sprites/none.png",
         "sprites/pose/cowboy.png",
         "sprites/pose/dunno.png",
@@ -121,7 +121,7 @@ namespace App {
         "sprites/pose/timid.png",
     ];
 
-    let gopherNoseList = [
+    const gopherNoseList = [
         "sprites/nose/neat_a.png",
         "sprites/nose/neat_b.png",
         "sprites/nose/oval.png",
@@ -130,7 +130,7 @@ namespace App {
         "sprites/nose/tiny.png",
     ];
 
-    let gopherAccessoryList = [
+    const gopherAccessoryList = [
         "sprites/none.png",
         "sprites/accessory/censored_black.png",
         "sprites/accessory/censored_red.png",
@@ -143,7 +143,7 @@ namespace App {
         "sprites/accessory/glasses_adamj.png",
     ];
 
-    let gopherEyesList = [
+    const gopherEyesList = [
         "sprites/eyes/alien_center.png",
         "sprites/eyes/alien_crazy.png",
         "sprites/eyes/alien_fish.png",
@@ -173,14 +173,14 @@ namespace App {
         "sprites/eyes/wink.png",
     ];
 
-    let gopherUndernoseList = [
+    const gopherUndernoseList = [
         "sprites/undernose/normal.png",
         "sprites/undernose/oval.png",
         "sprites/undernose/rome.png",
         "sprites/undernose/small.png",
     ];
 
-    let gopherTattooList = [
+    const gopherTattooList = [
         "sprites/none.png",
         "sprites/tattoo/apple.png",
         "sprites/tattoo/batman.png",
@@ -204,7 +204,7 @@ namespace App {
         "sprites/tattoo/vaultboy.png",
     ];
 
-    let optionTabList = [
+    const optionTabList = [
         {
             key: "colorOptionTab",
             options: gopherColorsList,
@@ -375,10 +375,10 @@ namespace App {
         return parts.join("");
     }
 
-    // Try loading state from the "state" GET param or
-    // initialize app with default state.
-    function loadState() {
-        let state = app.query.get("state");
+    // Try loading state from the state argument or,
+    // if not explicitely passed, "state" GET param.
+    function loadState(state: string = "") {
+        state = state || app.query.get("state");
         if (!state) {
             return;
         }
@@ -422,11 +422,10 @@ namespace App {
         let tabSelection = app.state.tabSelection;
         for (let i in tabSelection) {
             let label = tabSelection[i].label;
-            let href = "?state=" + stateString({tab: tabSelection[i]});
             if (tabInfo == tabSelection[i]) {
-                parts.push("<tr><td><a class='tab-selected' href='"+href+"'>"+label+"</a></td></tr>")
+                parts.push(`<tr><td><div class='tab-selected' onclick='App.changeTab(${i})'>${label}</div></td></tr>`);
             } else {
-                parts.push("<tr><td><a href='"+href+"'>"+label+"</a></td></tr>")
+                parts.push(`<tr><td><div onclick='App.changeTab(${i})'>${label}</div></td></tr>`);
             }
         }
         tabSelector.innerHTML = parts.join("");
@@ -444,11 +443,11 @@ namespace App {
             let imgURL = spriteURL(tabInfo.options[i]);
             let delta = {};
             delta[tabKey] = tabInfo.options[i];
-            let href = "?state=" + stateString(delta);
+            let updatedState = stateString(delta);
             if (app.state[tabKey] == tabInfo.options[i]) {
-                parts.push("<a class='option-link' href='"+href+"'><img class='option-selected' src='"+imgURL+"'></a>");
+                parts.push(`<div class='option-link' onclick='App.updateWithoutReload("${updatedState}")'><img class='option-selected' src='${imgURL}'></div>`);
             } else {
-                parts.push("<a class='option-link' href='"+href+"'><img src='"+imgURL+"'></a>");
+                parts.push(`<div class='option-link' onclick='App.updateWithoutReload("${updatedState}")'><img src='${imgURL}'></div>`);
             }
         }
         optionTab.innerHTML = parts.join("");
@@ -466,6 +465,7 @@ namespace App {
     function drawImages(images) {
         let canvas = <HTMLCanvasElement> document.getElementById("gopher");
         let ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         for (let i in images) {
             let img = images[i];
             ctx.drawImage(img, 0, 0);
@@ -535,24 +535,42 @@ namespace App {
         document.body.removeChild(el);
     }
 
-    function initShareButton(state) {
+    function initShareButton() {
         let share = document.getElementById("share");
         share.onclick = function() {
-            let url = "https://quasilyte.dev/gopherkon/?state=" + state;
+            let url = "https://quasilyte.dev/gopherkon/?state=" + stateString({});
             copyToClipboard(url);
         };
+    }
+
+    export function changeTab(tabIndex) {
+        let tabSelection = app.state.tabSelection;
+        let href = "?state=" + stateString({tab: tabSelection[tabIndex]});
+        window.location.href = href;
+    }
+
+    export function updateWithoutReload(state) {
+        loadState(state);
+        initOptionTab();
+        renderGopher();
+
+        // Rewrite URL query, if possible.
+        if (window.history.replaceState) {
+            let url = window.location.protocol + "//" + window.location.host + window.location.pathname;
+            url = url + "?state=" + state;
+            window.history.replaceState({path: url}, "", url);
+        }
     }
 
     export function main() {
         loadState();
         console.debug("decoded state:", app.state);
-        let state = stateString({});
-        console.debug("state string:", state);
+        console.debug("state string:", stateString({}));
         initOptionTabSelector();
         initOptionTab();
         renderGopher();
         initDownload();
-        initShareButton(state);
+        initShareButton();
     }
 }
 
