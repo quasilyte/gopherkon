@@ -37,6 +37,8 @@ var App;
         "sprites/teeth/shy.png",
         "sprites/teeth/soft.png",
         "sprites/teeth/broken.png",
+        "sprites/teeth/monoteeth.png",
+        "sprites/teeth/vampire.png",
     ];
     const gopherMouthList = [
         "sprites/none.png",
