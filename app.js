@@ -26,6 +26,7 @@ var App;
         "sprites/hair/dark_edgy.png",
         "sprites/hair/payot.png",
         "sprites/hair/short.png",
+        "sprites/hair/whiskers.png",
     ];
     const gopherTeethList = [
         "sprites/none.png",
@@ -136,6 +137,7 @@ var App;
         "sprites/accessory/glasses_nerd.png",
         "sprites/accessory/glasses_square.png",
         "sprites/accessory/glasses_adamj.png",
+        "sprites/accessory/glasses_cyber.png",
     ];
     const gopherEyesList = [
         "sprites/eyes/alien_center.png",
