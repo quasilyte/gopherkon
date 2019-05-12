@@ -138,6 +138,7 @@ var App;
         "sprites/accessory/glasses_square.png",
         "sprites/accessory/glasses_adamj.png",
         "sprites/accessory/glasses_cyber.png",
+        "sprites/accessory/headphones.png",
     ];
     const gopherEyesList = [
         "sprites/eyes/alien_center.png",
@@ -457,8 +458,8 @@ var App;
             "undernoseOptionTab",
             "noseOptionTab",
             "tattooOptionTab",
-            "poseOptionTab",
             "accessoryOptionTab",
+            "poseOptionTab",
         ];
         let images = [];
         let toLoad = drawOrder.length; // For sync.

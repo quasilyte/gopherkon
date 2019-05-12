@@ -148,6 +148,7 @@ namespace App {
         "sprites/accessory/glasses_square.png",
         "sprites/accessory/glasses_adamj.png",
         "sprites/accessory/glasses_cyber.png",
+        "sprites/accessory/headphones.png",
     ];
 
     const gopherEyesList = [
@@ -492,8 +493,8 @@ namespace App {
             "undernoseOptionTab",
             "noseOptionTab",
             "tattooOptionTab",
-            "poseOptionTab",
             "accessoryOptionTab",
+            "poseOptionTab",
         ];
 
         let images = [];
