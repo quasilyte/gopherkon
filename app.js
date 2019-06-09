@@ -109,7 +109,6 @@ var App;
         "sprites/pose/sign_persik_angry.png",
         "sprites/pose/sign_go.png",
         "sprites/pose/sign_linux.png",
-        "sprites/pose/sign_linux.png",
         "sprites/pose/thinking.magnifier.png",
         "sprites/pose/thinking.png",
         "sprites/pose/timid.beads.png",
