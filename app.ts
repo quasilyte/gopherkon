@@ -124,6 +124,9 @@ namespace App {
         "sprites/pose/timid.coffee.png",
         "sprites/pose/timid.money.png",
         "sprites/pose/timid.png",
+        "sprites/pose/sign_1.png",
+        "sprites/pose/sign_2.png",
+        "sprites/pose/sign_3.png",
     ];
 
     const gopherNoseList = [
