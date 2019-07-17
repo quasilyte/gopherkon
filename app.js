@@ -48,6 +48,7 @@ var App;
         "sprites/mouth/shout.png",
         "sprites/mouth/surprised.png",
         "sprites/mouth/tongue.png",
+        "sprites/mouth/annoyed.png",
     ];
     const gopherColorsList = [
         "sprites/torso/normal/0.png",
@@ -119,6 +120,7 @@ var App;
         "sprites/pose/sign_1.png",
         "sprites/pose/sign_2.png",
         "sprites/pose/sign_3.png",
+        "sprites/pose/handsup.png",
     ];
     const gopherNoseList = [
         "sprites/nose/neat_a.png",
