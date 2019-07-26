@@ -53,6 +53,7 @@ namespace App {
         "sprites/mouth/surprised.png",
         "sprites/mouth/tongue.png",
         "sprites/mouth/annoyed.png",
+        "sprites/mouth/smile.png",
     ];
 
     const gopherColorsList = [
@@ -129,6 +130,15 @@ namespace App {
         "sprites/pose/sign_2.png",
         "sprites/pose/sign_3.png",
         "sprites/pose/handsup.png",
+        "sprites/pose/shocked.png",
+        "sprites/pose/nunchuck.png",
+        "sprites/pose/water_magic.png",
+        "sprites/pose/fire_magic.png",
+        "sprites/pose/lightning_magic.png",
+        "sprites/pose/snowball.png",
+        "sprites/pose/dance.png",
+        "sprites/pose/thumbs_up1.png",
+        "sprites/pose/thumbs_up2.png",
     ];
 
     const gopherNoseList = [
