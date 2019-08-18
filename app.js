@@ -14,6 +14,11 @@ var App;
         console.error("bad num: %d", num);
         return "0";
     }
+    const gopherHatsList = [
+        "sprites/none.png",
+        "sprites/hats/sailor.png",
+        "sprites/hats/ushanka.png",
+    ];
     const gopherExtrasList = [
         "sprites/none.png",
         "sprites/extras/bowtie.png",
@@ -279,6 +284,11 @@ var App;
             options: gopherHairList,
             label: "Hair",
         },
+        {
+            key: "hatsOptionTab",
+            options: gopherHatsList,
+            label: "Hats",
+        },
     ];
     function objectListFmt(list) {
         return {
@@ -345,6 +355,7 @@ var App;
                 isLegacy: false,
             },
             hairOptionTab: "sprites/none.png",
+            hatsOptionTab: "sprites/none.png",
         },
         stateScheme: [
             { name: "tab", fmt: objectListFmt(optionTabList) },
@@ -362,6 +373,7 @@ var App;
             { name: "extrasOptionTab", fmt: stringListFmt(gopherExtrasList) },
             { name: "opts", fmt: optsFmt },
             { name: "hairOptionTab", fmt: stringListFmt(gopherHairList) },
+            { name: "hatsOptionTab", fmt: stringListFmt(gopherHatsList) },
         ],
     };
     function stateString(delta) {
@@ -472,6 +484,7 @@ var App;
             "undernoseOptionTab",
             "noseOptionTab",
             "tattooOptionTab",
+            "hatsOptionTab",
             "accessoryOptionTab",
             "poseOptionTab",
         ];
@@ -548,6 +561,7 @@ var App;
             "extrasOptionTab",
             "hairOptionTab",
             "tattooOptionTab",
+            "hatsOptionTab",
         ]);
         // nonZero enumerates tabs that should not have 0 index.
         let nonZero = new Set([

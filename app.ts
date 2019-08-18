@@ -15,6 +15,12 @@ namespace App {
         return "0";
     }
 
+    const gopherHatsList = [
+        "sprites/none.png",
+        "sprites/hats/sailor.png",
+        "sprites/hats/ushanka.png",
+    ];
+
     const gopherExtrasList = [
         "sprites/none.png",
         "sprites/extras/bowtie.png",
@@ -293,6 +299,11 @@ namespace App {
             options: gopherHairList,
             label: "Hair",
         },
+        {
+            key: "hatsOptionTab",
+            options: gopherHatsList,
+            label: "Hats",
+        },
     ];
 
     function objectListFmt(list) {
@@ -366,6 +377,7 @@ namespace App {
                 isLegacy: false,
             },
             hairOptionTab: "sprites/none.png",
+            hatsOptionTab: "sprites/none.png",
         },
 
         stateScheme: [
@@ -384,6 +396,7 @@ namespace App {
             {name: "extrasOptionTab", fmt: stringListFmt(gopherExtrasList)},
             {name: "opts", fmt: optsFmt},
             {name: "hairOptionTab", fmt: stringListFmt(gopherHairList)},
+            {name: "hatsOptionTab", fmt: stringListFmt(gopherHatsList)},
         ],
     };
 
@@ -507,6 +520,7 @@ namespace App {
             "undernoseOptionTab",
             "noseOptionTab",
             "tattooOptionTab",
+            "hatsOptionTab",
             "accessoryOptionTab",
             "poseOptionTab",
         ];
@@ -591,6 +605,7 @@ namespace App {
             "extrasOptionTab",
             "hairOptionTab",
             "tattooOptionTab",
+            "hatsOptionTab",
         ]);
 
         // nonZero enumerates tabs that should not have 0 index.
