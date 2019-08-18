@@ -19,6 +19,8 @@ var App;
         "sprites/hat/sailor.png",
         "sprites/hat/ushanka.png",
         "sprites/hat/googler.png",
+        "sprites/hat/tophat.png",
+        "sprites/hat/miner.png",
     ];
     const gopherExtrasList = [
         "sprites/none.png",
