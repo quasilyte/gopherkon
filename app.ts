@@ -15,10 +15,11 @@ namespace App {
         return "0";
     }
 
-    const gopherHatsList = [
+    const gopherHatList = [
         "sprites/none.png",
-        "sprites/hats/sailor.png",
-        "sprites/hats/ushanka.png",
+        "sprites/hat/sailor.png",
+        "sprites/hat/ushanka.png",
+        "sprites/hat/googler.png",
     ];
 
     const gopherExtrasList = [
@@ -300,9 +301,9 @@ namespace App {
             label: "Hair",
         },
         {
-            key: "hatsOptionTab",
-            options: gopherHatsList,
-            label: "Hats",
+            key: "hatOptionTab",
+            options: gopherHatList,
+            label: "Hat",
         },
     ];
 
@@ -377,7 +378,7 @@ namespace App {
                 isLegacy: false,
             },
             hairOptionTab: "sprites/none.png",
-            hatsOptionTab: "sprites/none.png",
+            hatOptionTab: "sprites/none.png",
         },
 
         stateScheme: [
@@ -396,7 +397,7 @@ namespace App {
             {name: "extrasOptionTab", fmt: stringListFmt(gopherExtrasList)},
             {name: "opts", fmt: optsFmt},
             {name: "hairOptionTab", fmt: stringListFmt(gopherHairList)},
-            {name: "hatsOptionTab", fmt: stringListFmt(gopherHatsList)},
+            {name: "hatOptionTab", fmt: stringListFmt(gopherHatList)},
         ],
     };
 
@@ -520,7 +521,7 @@ namespace App {
             "undernoseOptionTab",
             "noseOptionTab",
             "tattooOptionTab",
-            "hatsOptionTab",
+            "hatOptionTab",
             "accessoryOptionTab",
             "poseOptionTab",
         ];
@@ -605,7 +606,7 @@ namespace App {
             "extrasOptionTab",
             "hairOptionTab",
             "tattooOptionTab",
-            "hatsOptionTab",
+            "hatOptionTab",
         ]);
 
         // nonZero enumerates tabs that should not have 0 index.
