@@ -22,6 +22,7 @@ namespace App {
         "sprites/hat/googler.png",
         "sprites/hat/tophat.png",
         "sprites/hat/miner.png",
+        "sprites/hat/student.png",
     ];
 
     const gopherExtrasList = [
