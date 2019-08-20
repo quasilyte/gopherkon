@@ -34,6 +34,7 @@ namespace App {
         "sprites/extras/beard_adamj.png",
         "sprites/extras/scar_harry.png",
         "sprites/extras/antennae.png",
+        "sprites/extras/eyeflames.png",
     ];
 
     const gopherHairList = [
@@ -520,8 +521,8 @@ namespace App {
             "earsOptionTab",
             "torsoOptionTab",
             "hairOptionTab",
-            "extrasOptionTab",
             "eyesOptionTab",
+            "extrasOptionTab",
             "mouthOptionTab",
             "teethOptionTab",
             "undernoseOptionTab",

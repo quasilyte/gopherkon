@@ -32,6 +32,7 @@ var App;
         "sprites/extras/beard_adamj.png",
         "sprites/extras/scar_harry.png",
         "sprites/extras/antennae.png",
+        "sprites/extras/eyeflames.png",
     ];
     const gopherHairList = [
         "sprites/none.png",
@@ -484,8 +485,8 @@ var App;
             "earsOptionTab",
             "torsoOptionTab",
             "hairOptionTab",
-            "extrasOptionTab",
             "eyesOptionTab",
+            "extrasOptionTab",
             "mouthOptionTab",
             "teethOptionTab",
             "undernoseOptionTab",
