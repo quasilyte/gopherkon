@@ -43,6 +43,9 @@ namespace App {
         "sprites/hair/payot.png",
         "sprites/hair/short.png",
         "sprites/hair/whiskers.png",
+        "sprites/hair/whiskers2.png",
+        "sprites/hair/long.png",
+        "sprites/hair/tennis.png",
     ];
 
     const gopherTeethList = [
@@ -162,6 +165,8 @@ namespace App {
         "sprites/nose/round.png",
         "sprites/nose/small.png",
         "sprites/nose/tiny.png",
+        "sprites/nose/apple.png",
+        "sprites/nose/flat.png",
     ];
 
     const gopherAccessoryList = [
@@ -214,6 +219,7 @@ namespace App {
         "sprites/undernose/oval.png",
         "sprites/undernose/rome.png",
         "sprites/undernose/small.png",
+        "sprites/undernose/gourmet.png",
     ];
 
     const gopherTattooList = [
