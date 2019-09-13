@@ -200,6 +200,7 @@ var App;
         "sprites/eyes/small_center.png",
         "sprites/eyes/small_center_lashes.png",
         "sprites/eyes/wink.png",
+        "sprites/eyes/goofy.png",
     ];
     const gopherUndernoseList = [
         "sprites/undernose/normal.png",
