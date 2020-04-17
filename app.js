@@ -238,6 +238,8 @@ var App;
         "sprites/tattoo/sonic.png",
         "sprites/tattoo/vaultboy.png",
         "sprites/tattoo/reddit.png",
+        "sprites/tattoo/virus1.png",
+        "sprites/tattoo/virus2.png",
     ];
     const optionTabList = [
         {
