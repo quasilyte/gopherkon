@@ -128,6 +128,7 @@ var App;
         "sprites/pose/sign_go.png",
         "sprites/pose/sign_linux.png",
         "sprites/pose/thinking.magnifier.png",
+        "sprites/pose/thinking.medic.png",
         "sprites/pose/thinking.png",
         "sprites/pose/timid.beads.png",
         "sprites/pose/timid.camera.png",
@@ -158,18 +159,22 @@ var App;
         "sprites/nose/apple.png",
         "sprites/nose/flat.png",
     ];
+    const gopherEyewearList = [
+        "sprites/none.png",
+        "sprites/eyewear/censored_black.png",
+        "sprites/eyewear/censored_red.png",
+        "sprites/eyewear/glasses_cool.png",
+        "sprites/eyewear/deal_with_it.png",
+        "sprites/eyewear/glasses_hipster.png",
+        "sprites/eyewear/glasses_glam.png",
+        "sprites/eyewear/glasses_nerd.png",
+        "sprites/eyewear/glasses_square.png",
+        "sprites/eyewear/glasses_adamj.png",
+        "sprites/eyewear/glasses_cyber.png",
+        "sprites/eyewear/protective_goggles.png",
+    ];
     const gopherAccessoryList = [
         "sprites/none.png",
-        "sprites/accessory/censored_black.png",
-        "sprites/accessory/censored_red.png",
-        "sprites/accessory/glasses_cool.png",
-        "sprites/accessory/deal_with_it.png",
-        "sprites/accessory/glasses_hipster.png",
-        "sprites/accessory/glasses_glam.png",
-        "sprites/accessory/glasses_nerd.png",
-        "sprites/accessory/glasses_square.png",
-        "sprites/accessory/glasses_adamj.png",
-        "sprites/accessory/glasses_cyber.png",
         "sprites/accessory/headphones.png",
         "sprites/accessory/facemask.png",
     ];
@@ -281,6 +286,11 @@ var App;
             label: "Nose",
         },
         {
+            key: "eyewearOptionTab",
+            options: gopherEyewearList,
+            label: "Eyewear",
+        },
+        {
             key: "accessoryOptionTab",
             options: gopherAccessoryList,
             label: "Accessory",
@@ -363,6 +373,7 @@ var App;
             mouthOptionTab: "sprites/none.png",
             undernoseOptionTab: "sprites/undernose/normal.png",
             noseOptionTab: "sprites/nose/oval.png",
+            eyewearOptionTab: "sprites/none.png",
             accessoryOptionTab: "sprites/none.png",
             tattooOptionTab: "sprites/none.png",
             extrasOptionTab: "sprites/none.png",
@@ -384,6 +395,7 @@ var App;
             { name: "mouthOptionTab", fmt: stringListFmt(gopherMouthList) },
             { name: "undernoseOptionTab", fmt: stringListFmt(gopherUndernoseList) },
             { name: "noseOptionTab", fmt: stringListFmt(gopherNoseList) },
+            { name: "eyewearOptionTab", fmt: stringListFmt(gopherEyewearList) },
             { name: "accessoryOptionTab", fmt: stringListFmt(gopherAccessoryList) },
             { name: "tattooOptionTab", fmt: stringListFmt(gopherTattooList) },
             { name: "extrasOptionTab", fmt: stringListFmt(gopherExtrasList) },
@@ -502,6 +514,7 @@ var App;
             "tattooOptionTab",
             "hatOptionTab",
             "accessoryOptionTab",
+            "eyewearOptionTab",
             "poseOptionTab",
         ];
         let images = [];
@@ -574,6 +587,7 @@ var App;
         // to have zero value against all other options.
         let preferZero = new Set([
             "accessoryOptionTab",
+            "eyewearOptionTab",
             "extrasOptionTab",
             "hairOptionTab",
             "tattooOptionTab",
