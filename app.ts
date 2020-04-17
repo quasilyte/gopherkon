@@ -182,6 +182,7 @@ namespace App {
         "sprites/accessory/glasses_adamj.png",
         "sprites/accessory/glasses_cyber.png",
         "sprites/accessory/headphones.png",
+        "sprites/accessory/facemask.png",
     ];
 
     const gopherEyesList = [
