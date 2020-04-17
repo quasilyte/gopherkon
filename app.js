@@ -25,6 +25,9 @@ var App;
         "sprites/hat/puffball.png",
         "sprites/hat/santa.png",
         "sprites/hat/sherlock.png",
+        "sprites/hat/bow_yellow.png",
+        "sprites/hat/bow_purple.png",
+        "sprites/hat/bow_blue.png",
     ];
     const gopherExtrasList = [
         "sprites/none.png",
