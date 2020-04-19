@@ -188,12 +188,15 @@ namespace App {
         "sprites/eyewear/glasses_adamj.png",
         "sprites/eyewear/glasses_cyber.png",
         "sprites/eyewear/protective_goggles.png",
+        "sprites/eyewear/monocle_left.png",
+        "sprites/eyewear/monocle_right.png",
     ];
 
     const gopherAccessoryList = [
         "sprites/none.png",
         "sprites/accessory/headphones.png",
         "sprites/accessory/facemask.png",
+        "sprites/accessory/evil_mustache.png",
     ];
 
     const gopherEyesList = [
@@ -630,21 +633,21 @@ namespace App {
         return Math.floor(Math.random() * (max - min)) + min;
     }
 
-    function randBool(): boolean {
-        return Math.random() >= 0.5;
+    function randBool(v = 0.5): boolean {
+        return Math.random() >= v;
     }
 
     function randomizedState(): string {
         // preferZero enumerate tabs that should have at least 50%
         // to have zero value against all other options.
-        let preferZero = new Set([
-            "accessoryOptionTab",
-            "eyewearOptionTab",
-            "extrasOptionTab",
-            "hairOptionTab",
-            "tattooOptionTab",
-            "hatOptionTab",
-        ]);
+        let preferZero = {
+            "accessoryOptionTab": 0.15,
+            "eyewearOptionTab": 0.5,
+            "extrasOptionTab": 0.25,
+            "hairOptionTab": 0.25,
+            "tattooOptionTab": 0.5,
+            "hatOptionTab": 0.4,
+        };
 
         // nonZero enumerates tabs that should not have 0 index.
         let nonZero = new Set([
@@ -663,7 +666,7 @@ namespace App {
             }
             let minIndex = nonZero.has(desc.name) ? 1 : 0;
             let index = rand(minIndex, tab.options.length);
-            if (preferZero.has(desc.name) && randBool()) {
+            if (preferZero[desc.name] && randBool(preferZero[desc.name])) {
                 index = 0;
             }
             let value = desc.fmt.dec(encodeWord(index));
