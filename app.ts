@@ -190,6 +190,7 @@ namespace App {
         "sprites/eyewear/protective_goggles.png",
         "sprites/eyewear/monocle_left.png",
         "sprites/eyewear/monocle_right.png",
+        "sprites/eyewear/monocle_black.png",
     ];
 
     const gopherAccessoryList = [
