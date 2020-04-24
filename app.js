@@ -155,6 +155,7 @@ var App;
         "sprites/pose/thumbs_up2.png",
         "sprites/pose/sides2.png",
         "sprites/pose/sides3.png",
+        "sprites/pose/sides4.png",
     ];
     const gopherNoseList = [
         "sprites/nose/neat_a.png",
